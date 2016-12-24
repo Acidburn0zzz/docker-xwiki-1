@@ -1,0 +1,26 @@
+language: c
+compiler:
+branches:
+  only:
+    - master
+
+env:
+  - APPNAME=XWiki
+
+script:
+  - curl -s -o VERSION.txt https://lv.binarybabel.org/catalog-api/xwiki/stable.txt?p=version
+  - echo "${APPNAME} latest version:" && cat VERSION.txt
+
+after_success:
+  # PIN BUILD VERSION
+  - export VERSION=$(cat VERSION.txt)
+  - sed -i'' "s^.*\!.*^[\![Latestver](https://lv.binarybabel.org/catalog-api/xwiki/stable.svg?v=${VERSION})](https://github.com/binarybabel/docker-xwiki/releases)^" README.md
+  - sed -i'' "s/\blatest\b/v${VERSION}/g" README.md
+  - sed -i'' "s/XWIKI_VERSION=/XWIKI_VERSION=${VERSION}/g" Dockerfile
+  # CREATE GIT TAG
+  - git config --global user.email "builds@travis-ci.com"
+  - git config --global user.name "Travis CI"
+  - git add VERSION.txt
+  - git commit -am "${APPNAME} ${VERSION}"
+  - git tag v${VERSION} -am "${APPNAME} ${VERSION}"
+  - git push --quiet https://$GITHUBKEY@github.com/binarybabel/docker-xwiki v$VERSION > /dev/null 2>&1
