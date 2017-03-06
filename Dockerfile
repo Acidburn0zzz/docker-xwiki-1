@@ -15,7 +15,7 @@ VOLUME ${DATA_DIR}
 EXPOSE 8080
 
 #COPY xwiki.zip /xwiki.zip
-ENV XWIKI_VERSION=
+ENV XWIKI_VERSION=9.1.2
 RUN cd / \
     && XWIKI_DOWNLOAD="http://download.forge.ow2.org/xwiki/xwiki-enterprise-jetty-hsqldb-${XWIKI_VERSION:-$(curl -s https://lv.binarybabel.org/catalog-api/xwiki/stable.txt?p=version)}.zip" \
     && echo Downloading ${XWIKI_DOWNLOAD} \
