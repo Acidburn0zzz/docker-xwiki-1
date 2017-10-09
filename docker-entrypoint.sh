@@ -1,5 +1,5 @@
 #!/bin/sh
-## Vars: APP_DIR, DATA_DIR, JAVA_XMX, JETTY_PORT, INSTALL_DEMO
+## Vars: APP_DIR, DATA_DIR, JAVA_XMX, JETTY_PORT
 echo "Starting XWIKI-DOCKER ..."
 echo "|"
 if [ ! -z "${XWIKI_VERSION}" ] ; then
@@ -10,18 +10,25 @@ echo "|   JAVA_XMX: ${JAVA_XMX}"
 echo "| JETTY_PORT: ${JETTY_PORT}"
 echo "|"
 
-mkdir -p "${DATA_DIR}"
-
-if [ -z "$(ls ${DATA_DIR}/)" -a ${INSTALL_DEMO} -gt 0 ] ; then
-  echo "XWIKI-DOCKER: Empty data directory detected..."
-  echo "* Demo configuration will be installed:"
-  echo "*   Username: Admin   Password: admin"
-  echo "* Press Ctrl-C to cancel"
-  sleep 10
-  cp -Ra ${APP_DIR}/data/* ${DATA_DIR}/ >/dev/null
-  rm -f ${DATA_DIR}/jobs/status/distribution/status.xml >/dev/null
-  echo "DONE."
+if [ ! -z "${DEBUG}" ] ; then
+  set -x
+  ls ${APP_DIR}
+  ls ${DATA_DIR}
 fi
+
+if [ ! -d jetty ] ; then
+  echo "XWIKI-DOCKER: Bad image build!"
+  echo "* This image is missing required files..."
+  echo "*"
+  echo "* Since it is built automatically this"
+  echo "* is most likely due to changes in"
+  echo "* xwiki since the previous release."
+  echo "*"
+  echo "* Please create an issue at:"
+  echo "*   https://github.com/binarybabel/docker-xwiki"
+fi
+
+mkdir -p "${DATA_DIR}"
 
 # Ensure required directories exist.
 for X in logs jetty ; do

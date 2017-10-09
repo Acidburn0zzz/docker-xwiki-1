@@ -17,13 +17,13 @@ EXPOSE 8080
 #COPY xwiki.zip /xwiki.zip
 ENV XWIKI_VERSION=
 RUN cd / \
-    && XWIKI_DOWNLOAD="http://download.forge.ow2.org/xwiki/xwiki-standard-${XWIKI_VERSION:-$(curl -s https://lv.binarybabel.org/catalog-api/xwiki/stable.txt?p=version)}.zip" \
+    && XWIKI_DOWNLOAD="http://download.forge.ow2.org/xwiki/xwiki-${XWIKI_VERSION:-$(curl -s https://lv.binarybabel.org/catalog-api/xwiki/stable.txt?p=version)}.zip" \
     && echo Downloading ${XWIKI_DOWNLOAD} \
     && curl -fsSLo xwiki.zip "${XWIKI_DOWNLOAD}" \
     && unzip xwiki.zip \
     && rm xwiki.zip \
     && rmdir xwiki \
-    && ln -s xwiki-enterprise-* ./xwiki
+    && ln -s xwiki-platform-* ./xwiki
 
 COPY docker-entrypoint.sh ${APP_DIR}
 ENTRYPOINT ["./docker-entrypoint.sh"]

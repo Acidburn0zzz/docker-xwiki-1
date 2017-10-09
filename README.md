@@ -46,8 +46,6 @@ Environmental Variables
 
 * __FS\_ATTACHMENTS__
   * default: '1' (YES) - store attachments as files in data volume (instead of database)
-* __INSTALL\_DEMO__
-  * default: '0' (NO) - install demo user and content
 * __JAVA\_XMX__
   * default: '1024m' - amount of memory to allocate to Java
 
