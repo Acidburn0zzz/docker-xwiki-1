@@ -12,6 +12,13 @@ This image is rebuilt automatically when new versions of XWiki are released, thr
 
 This image is aimed at small-scale deployments, perfect for teams or private usage. It uses the **standalone** edition of XWiki and an embedded HSQLDB database saved to the connected data volume. [See the XWiki documentation for other deployment options.](http://platform.xwiki.org/xwiki/bin/view/AdminGuide/Installation)
 
+## Installation / Upgrade Notes
+
+It's highly recommended that first-time setup, or any version upgrades,
+_which will trigger XWiki's setup wizard_ are performed by connecting
+directly to the docker instance. Front-end proxies and load-balancers
+can make the setup interface unusable.
+
 ## Usage
 
 By default the application will be available from `http://localhost:8080`
