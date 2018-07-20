@@ -1,8 +1,8 @@
-# XWiki [latest] Standalone – Docker Image
+# XWiki [v10.6] Standalone – Docker Image
 
 **[The Advanced Open Source Enterprise Wiki](http://www.xwiki.org/xwiki/bin/view/Main/WebHome)**
 
-[![Build Status](https://travis-ci.org/binarybabel/docker-xwiki.svg?branch=master)](https://travis-ci.org/binarybabel/docker-xwiki) [![GitHub release](https://img.shields.io/github/tag/binarybabel/docker-xwiki.svg)](https://hub.docker.com/r/binarybabel/xwiki/tags/)
+[![Latestver](https://lv.binarybabel.org/catalog-api/xwiki/stable.svg?v=10.6)](https://github.com/binarybabel/docker-xwiki/releases)
 
 This image is rebuilt automatically when new versions of XWiki are released, through the use of webhooks provided by the [Latestver](https://lv.binarybabel.org) dependency tracking tool, a [BinaryBabel OSS Project](https://github.com/binarybabel/latestver#readme).
 
@@ -26,7 +26,7 @@ By default the application will be available from `http://localhost:8080`
 **Running Directly**
 
 ```
-# docker run -p 8080:8080 -v $(pwd):/xwiki-data binarybabel/xwiki:latest
+# docker run -p 8080:8080 -v $(pwd):/xwiki-data binarybabel/xwiki:v10.6
 ```
 
 **Using** `docker-compose.yml`
@@ -35,7 +35,7 @@ By default the application will be available from `http://localhost:8080`
 version: '2'
 services:
   app:
-    image: binarybabel/xwiki:latest
+    image: binarybabel/xwiki:v10.6
     volumes:
       - .:/xwiki-data
     ports:
